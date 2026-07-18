@@ -103,15 +103,15 @@ class UpdateDialog(QDialog):
     def init_config(self):
         self.set_prerelease(False)
         self.forks_cache = fetch_and_cache_forks()
-        self.forks_cache["th3w1zard1/PyKotor"] = fetch_fork_releases(
-            "th3w1zard1/PyKotor", include_all=True
+        self.forks_cache["example-owner/example-repo"] = fetch_fork_releases(
+            "example-owner/example-repo", include_all=True
         )
         self.populate_fork_combo_box()
         self.on_fork_changed(self.ui.forkComboBox.currentIndex())
 
     def populate_fork_combo_box(self):
         self.ui.forkComboBox.clear()
-        self.ui.forkComboBox.addItem("th3w1zard1/PyKotor")
+        self.ui.forkComboBox.addItem("example-owner/example-repo")
         for fork in self.forks_cache:
             self.ui.forkComboBox.addItem(fork)
 
@@ -193,7 +193,7 @@ class UpdateDialog(QDialog):
         from toolset.gui.common.localization import trf
 
         self.ui.currentVersionLabel.setText(
-            trf("Holocron Toolset Current Version: {version}", version=version_text)
+            trf("the host app Toolset Current Version: {version}", version=version_text)
         )
 
     def on_release_changed(

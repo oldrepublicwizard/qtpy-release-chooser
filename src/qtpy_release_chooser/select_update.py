@@ -57,14 +57,14 @@ if __name__ == "__main__":
 
         file_absolute_path = pathlib.Path(__file__).resolve()
 
-        pykotor_path = file_absolute_path.parents[6] / "Libraries" / "PyKotor" / "src" / "pykotor"
-        if pykotor_path.exists():
-            update_sys_path(pykotor_path.parent)
-        pykotor_gl_path = (
-            file_absolute_path.parents[6] / "Libraries" / "PyKotorGL" / "src" / "pykotor"
+        vendor_lib_path = file_absolute_path.parents[6] / "Libraries" / "VendorLib" / "src" / "VendorLib"
+        if vendor_lib_path.exists():
+            update_sys_path(vendor_lib_path.parent)
+        vendor_gl_path = (
+            file_absolute_path.parents[6] / "Libraries" / "VendorGL" / "src" / "VendorLib"
         )
-        if pykotor_gl_path.exists():
-            update_sys_path(pykotor_gl_path.parent)
+        if vendor_gl_path.exists():
+            update_sys_path(vendor_gl_path.parent)
         utility_path = file_absolute_path.parents[6] / "Libraries" / "Utility" / "src"
         if utility_path.exists():
             update_sys_path(utility_path)
@@ -174,15 +174,15 @@ class UpdateDialog(QDialog):
     def init_config(self):
         self.set_prerelease(False)
         self.fetch_and_cache_forks_with_releases()
-        self.forks_cache["th3w1zard1/PyKotor"] = self.fetch_fork_releases(
-            "th3w1zard1/PyKotor", include_all=True
+        self.forks_cache["example-owner/example-repo"] = self.fetch_fork_releases(
+            "example-owner/example-repo", include_all=True
         )
         self.populate_fork_combo_box()
         self.on_fork_changed(self.ui.forkComboBox.currentIndex())
 
     def fetch_and_cache_forks_with_releases(self):
         self.forks_cache.clear()
-        forks_url = "https://api.github.com/repos/th3w1zard1/PyKotor/forks"
+        forks_url = "https://api.github.com/repos/example-owner/example-repo/forks"
         if requests is None:
             RobustLogger().warning("requests library not available, cannot fetch forks")
             return
@@ -226,7 +226,7 @@ class UpdateDialog(QDialog):
 
     def populate_fork_combo_box(self):
         self.ui.forkComboBox.clear()
-        self.ui.forkComboBox.addItem("th3w1zard1/PyKotor")
+        self.ui.forkComboBox.addItem("example-owner/example-repo")
         for fork in self.forks_cache:
             self.ui.forkComboBox.addItem(fork)
 
@@ -370,7 +370,7 @@ class UpdateDialog(QDialog):
         except Exception:
             version_color = success_color.name()
         version_text = f"<span style='font-size:16px; font-weight:bold; color:{version_color};'>{current_version}</span>"
-        self.ui.currentVersionLabel.setText(f"Holocron Toolset Current Version: {version_text}")
+        self.ui.currentVersionLabel.setText(f"the host app Toolset Current Version: {version_text}")
 
     def get_latest_release(self) -> GithubRelease | None:
         if self.releases:
@@ -441,7 +441,7 @@ class UpdateDialog(QDialog):
             target=run_progress_dialog,
             args=(
                 progress_queue,
-                "Holocron Toolset is updating and will restart shortly...",
+                "the host app Toolset is updating and will restart shortly...",
             ),
         )
         progress_process.start()
@@ -473,7 +473,7 @@ class UpdateDialog(QDialog):
 
         updater = AppUpdate(
             links,
-            "HolocronToolset",
+            "ExampleToolset",
             LOCAL_PROGRAM_INFO["currentVersion"],
             toolset_tag_to_version(release.tag_name),
             downloader=None,

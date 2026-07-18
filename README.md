@@ -1,23 +1,17 @@
 # qtpy-release-chooser
 
-Qt UI for picking GitHub release / fork / channel (extracted from Holocron Toolset). Call `configure(...)` with your program info instead of Holocron's `toolset.config`.
+Qt dialog for picking a GitHub release, fork, or update channel.
 
-Expects `github-app-updater` on PYTHONPATH or installed separately.
+Call `configure(...)` once with your program name, repo, and whatever else the dialog needs. Don't hard-code another app's config module into it.
+
+Depends on `qtpy` plus a real binding (PyQt5/6 or PySide).
 
 ## Install
 
 ```bash
-pip install -e .
-# or from GitHub:
-pip install git+https://github.com/oldrepublicwizard/qtpy-release-chooser
+pip install git+https://github.com/oldrepublicwizard/qtpy-release-chooser.git
+pip install qtpy PyQt5  # or PySide6, etc.
 ```
-
-## Origin
-
-Extracted from the [PyKotor](https://github.com/OpenKotOR/PyKotor) monorepo `utility` / related packages.
-KotOR-specific couplings were removed or made optional for standalone use.
-
-
 
 ## License
 

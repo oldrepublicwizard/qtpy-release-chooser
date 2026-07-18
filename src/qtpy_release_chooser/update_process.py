@@ -57,7 +57,7 @@ def start_update_process(
         target=run_progress_dialog,
         args=(
             progress_queue,
-            "Holocron Toolset is updating and will restart shortly...",
+            "the host app Toolset is updating and will restart shortly...",
         ),
     )
     progress_process.start()
@@ -119,7 +119,7 @@ def start_update_process(
 
     updater = AppUpdate(
         [download_url],
-        "HolocronToolset",
+        "ExampleToolset",
         LOCAL_PROGRAM_INFO["currentVersion"],
         toolset_tag_to_version(release.tag_name),
         downloader=None,

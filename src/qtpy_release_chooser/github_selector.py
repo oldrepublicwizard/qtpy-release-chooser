@@ -1,4 +1,4 @@
-"""GitHub fork selector: choose Holocron Toolset fork for updates and release checks."""
+"""GitHub fork selector: choose the host app Toolset fork for updates and release checks."""
 
 from __future__ import annotations
 
@@ -73,14 +73,14 @@ if __name__ == "__main__":
 
         file_absolute_path = pathlib.Path(__file__).resolve()
 
-        pykotor_path = file_absolute_path.parents[6] / "Libraries" / "PyKotor" / "src" / "pykotor"
-        if pykotor_path.exists():
-            update_sys_path(pykotor_path.parent)
-        pykotor_gl_path = (
-            file_absolute_path.parents[6] / "Libraries" / "PyKotorGL" / "src" / "pykotor"
+        vendor_lib_path = file_absolute_path.parents[6] / "Libraries" / "VendorLib" / "src" / "VendorLib"
+        if vendor_lib_path.exists():
+            update_sys_path(vendor_lib_path.parent)
+        vendor_gl_path = (
+            file_absolute_path.parents[6] / "Libraries" / "VendorGL" / "src" / "VendorLib"
         )
-        if pykotor_gl_path.exists():
-            update_sys_path(pykotor_gl_path.parent)
+        if vendor_gl_path.exists():
+            update_sys_path(vendor_gl_path.parent)
         utility_path = file_absolute_path.parents[6] / "Libraries" / "Utility" / "src"
         if utility_path.exists():
             update_sys_path(utility_path)
@@ -726,8 +726,8 @@ if __name__ == "__main__":
 
     sys.excepthook = on_app_crash
 
-    owner = "KOTORCommunityPatches"
-    repo = "Vanilla_KOTOR_Script_Source"
+    owner = "ExampleOrg"
+    repo = "example-script-source"
 
     app = QApplication(sys.argv)
     dialog = GitHubFileSelector(owner, repo, selected_files=["k_act_com33.nss"], parent=None)

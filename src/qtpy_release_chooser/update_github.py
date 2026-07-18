@@ -1,4 +1,4 @@
-"""Fetch GitHub releases for Holocron Toolset forks and update checks."""
+"""Fetch GitHub releases for the host app Toolset forks and update checks."""
 
 from __future__ import annotations
 
@@ -44,7 +44,7 @@ def fetch_and_cache_forks() -> dict[str, list[GithubRelease]]:
     if requests is None:
         RobustLogger().warning("requests library not available, cannot fetch forks")
         return forks_cache
-    forks_url = "https://api.github.com/repos/th3w1zard1/PyKotor/forks"
+    forks_url = "https://api.github.com/repos/example-owner/example-repo/forks"
     try:
         forks_response: requests.Response = requests.get(forks_url, timeout=15)
         forks_response.raise_for_status()
